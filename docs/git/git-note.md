@@ -1,0 +1,78 @@
+---
+title: git常用命令
+date: 2022-02-10
+sidebar: 'auto'
+tags:
+ - 笔记
+ - git
+categories:
+ -  git
+---
+
+# git
+
+```js
+//克隆
+git clone https://github.com/LoveCodingHyh/supermall.git
+
+//状态
+git status
+
+//添加项目
+git push
+
+//
+
+git init 初始化git仓库    让git管理此文件夹
+
+//在需要备份的时候
+	git add .
+	git commit -m "版本说明"
+//查看所有版本信息
+	git log
+	git reflog
+//版本回退
+	git reset --hard 版本标识 (直接切换) 
+	git reset --soft 版本标识 (如果想把上一次commit的代码撤回到暂存区 用这个)
+  
+//版本撤销
+	git checkout .
+  
+//删除文件
+	git rm 文件名
+	git commit -m "说明"
+//忽略文件
+ 	仓库根目录添加以.gitignore为后缀的文件，内部书写需要忽略的文件或文件夹
+  
+  
+//连接远程库
+	git remote add origin 远程库地址
+	第一次推  git push -u origin master
+	后来推 git push
+	拉取 git pull origin master
+	强制推 git push -f origin master
+	切换完版本号 把当前版本强制推到仓库
+		git push -f origin HEAD:master 
+  
+  ssh-keygen -t rsa -C <email>
+	本地运行首次连接时的公钥认证命令： ssh -T 地址
+		ssh -T git@e.coding.net
+
+打标签
+	git tag -a v2 -m "项目2.0版本"
+	删除标签 git tag -d v2
+	切换版本 git checkout v2
+
+
+查看分支：git branch
+创建分支：git branch <name>
+切换分支：git checkout <name>
+创建+切换分支：git checkout -b <name>
+合并某分支到当前分支：git merge <name>
+删除分支：git branch -d <name>
+
+推送指定分支   git push origin 分支名
+拉取指定分支   git pull origin 分支名
+删除指定分支   git push origin :分支名
+
+```

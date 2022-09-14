@@ -1,0 +1,29 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "author": "reco_luan",
+  "scripts": {
+    "serve": "vuepress dev . --open --host \"localhost\"",
+    "build": "vuepress build .",
+    "deploy": "bash deploy.sh",
+    "auto": "vuepress build docs && node ./deploy/index.js"
+  },
+  "devDependencies": {
+    "vuepress": "1.8.2",
+    "vuepress-plugin-dynamic-title": "^1.0.0",
+    "vuepress-plugin-meting": "^0.3.1",
+    "vuepress-plugin-sakura": "^1.1.0",
+    "vuepress-theme-reco": "1.6.10"
+  },
+  "description": "my-blog",
+  "dependencies": {
+    "@vuepress-reco/vuepress-plugin-kan-ban-niang": "^1.0.5",
+    "archiver": "^4.0.1",
+    "markdown-it-img-lazy": "^1.0.3",
+    "markdown-it-imsize": "^2.0.1",
+    "node-ssh": "^10.0.1",
+    "vuepress-plugin-cursor-effects": "^1.1.2",
+    "vuepress-plugin-img-lazy": "^1.0.4",
+    "vuepress-plugin-nuggets-style-copy": "^1.0.3"
+  }
+}
