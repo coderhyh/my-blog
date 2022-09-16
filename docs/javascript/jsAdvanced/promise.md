@@ -133,4 +133,162 @@ categories:
   - 如果所有的Promise都是reject的，那么也会等到所有的Promise都变成rejected状态；
 - 如果所有的Promise都是reject的，那么会报一个AggregateError的错误。
 
-## 手写promise
+## 手写简易版promise
+
+```typescript
+enum STATUS {
+  PENDING = "pending",
+  FULFILLED = "fulfilled",
+  REJECTED = "rejected",
+}
+
+type AnyFn = (value?: any) => any;
+type Executor = (resolve: AnyFn, reject: AnyFn) => void;
+
+function execFunctionWithCatchError<T extends AnyFn>(execFn: T, value: any, resolve: T, reject: T) {
+  try {
+    const result = execFn(value)
+    resolve(result)
+  } catch (error) {
+    reject(error)
+  }
+}
+
+class HyhPromise {
+  private currentStatus: string = STATUS.PENDING;
+  private result: any;
+  private resolveFns: AnyFn[] = [];
+  private rejectFns: AnyFn[] = [];
+  constructor(executor: Executor) {
+    const resolve = (value: any) => {
+      if (this.currentStatus === STATUS.PENDING) {
+        queueMicrotask(() => {
+          this.result = value;
+          if (this.currentStatus !== STATUS.PENDING) return;
+          this.currentStatus = STATUS.FULFILLED;
+          this.resolveFns.forEach((fn) => fn());
+        });
+      }
+    };
+    const reject = (reason: any) => {
+      if (this.currentStatus === STATUS.PENDING) {
+        queueMicrotask(() => {
+          this.result = reason;
+          if (this.currentStatus !== STATUS.PENDING) return;
+          this.currentStatus = STATUS.REJECTED;
+          this.rejectFns.forEach((fn) => fn());
+        });
+      }
+    };
+    try {
+      executor(resolve, reject);
+    } catch (error) {
+      reject(error)
+    }
+  }
+
+  then(onResolve?: AnyFn, onReject?: AnyFn) {
+    onResolve = onResolve || (res => res)
+    onReject = onReject || (err => {throw err})
+    return new HyhPromise((resolve, reject) => {
+      if (this.currentStatus === STATUS.FULFILLED && onResolve) {
+        execFunctionWithCatchError(onResolve, this.result, resolve, reject)
+      }
+      
+      if (this.currentStatus === STATUS.REJECTED && onReject) {
+        execFunctionWithCatchError(onReject, this.result, resolve, reject)
+      }
+      
+      if (this.currentStatus !== STATUS.PENDING) return 
+        
+      onResolve &&
+      this.resolveFns.push(() => {
+        execFunctionWithCatchError(<AnyFn>onResolve, this.result, resolve, reject)
+      });
+      
+      onReject &&
+      this.rejectFns.push(() => {
+        execFunctionWithCatchError(<AnyFn>onReject, this.result, resolve, reject)
+      });
+    });
+  }
+
+  catch(onReject: AnyFn) {
+    return this.then(undefined, onReject);
+  }
+
+  finally(onfinally: AnyFn) {
+    return this.then(onfinally, onfinally)
+  }
+
+  static resolve(result: any) {
+    return new HyhPromise(resolve => resolve(result))
+  }
+
+  static reject(result: any) {
+    return new HyhPromise((_, reject) => reject(result))
+  }
+
+  static all(promiseList: HyhPromise[]) {
+    return new HyhPromise((resolve, reject) => {
+      const values: any[] = []
+      promiseList.forEach(promise => {
+        promise.then(res => {
+          values.push(res)
+          values.length === promiseList.length && resolve(values)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    })
+  }
+
+  static allSettled(promiseList: HyhPromise[]) {
+    return new HyhPromise((resolve, reject) => {
+      const values: Array<{status: string, value: any}> = []
+      promiseList.forEach(promise => {
+        promise.then(res => {
+          values.push({ status: STATUS.FULFILLED, value: res })
+          values.length === promiseList.length && resolve(values)
+        }).catch(err => {
+          values.push({ status: STATUS.REJECTED, value: err })
+          values.length === promiseList.length && resolve(values)
+        })
+      })
+    })
+  }
+
+  static race(promiseList: HyhPromise[]) {
+    return new HyhPromise((resolve, reject) => {
+      promiseList.forEach(promise => {
+        promise.then(resolve, reject)
+      })
+    })
+  }
+
+  static any(promiseList: HyhPromise[]) {
+    return new HyhPromise((resolve, reject) => {
+      const values: any[] = []
+      promiseList.forEach(promise => {
+        promise.then(resolve, err => {
+          values.push(err)
+          values.length === promiseList.length && 
+            reject(new AggregateError(values, 'All promises were rejected'))
+        })
+      })
+    })
+  }
+}
+
+const arr = [
+  new HyhPromise((resolve, reject) => {
+    setTimeout(() => { reject(1) }, 3000)
+  }),
+  new HyhPromise((resolve, reject) => {
+    setTimeout(() => { reject(2) }, 3000)
+  }),
+  new HyhPromise((resolve, reject) => {
+    setTimeout(() => { reject(3) }, 2000)
+  })
+]
+```

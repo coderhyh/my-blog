@@ -47,6 +47,17 @@ git init 初始化git仓库    让git管理此文件夹
   
 //连接远程库
 	git remote add origin 远程库地址
+		查看远程仓库信息
+			git remote -v
+		删除远程仓库
+			git remote rm origin
+		新增远程仓库地址
+			git remote add origin 新的git地址
+		更新远程仓库地址
+			一些远程仓库分支删除了，但是本地 git branch -a 查看时，还是会显示已被删除的那个远程分支，
+				所以可以通过执行下面的指令，刷新本地的远程分支信息
+			git remote update origin --prune
+
 	第一次推  git push -u origin master
 	后来推 git push
 	拉取 git pull origin master
