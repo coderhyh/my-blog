@@ -22,6 +22,7 @@ module.exports = {
         "jsAdvanced/proxy-reflect",
         "jsAdvanced/vue-reactive",
         "jsAdvanced/promise",
+        "jsAdvanced/iterator-generator",
       ]
     },
     "AJax-note",
