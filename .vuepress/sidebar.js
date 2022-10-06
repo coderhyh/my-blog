@@ -23,6 +23,7 @@ module.exports = {
         "jsAdvanced/vue-reactive",
         "jsAdvanced/promise",
         "jsAdvanced/iterator-generator",
+        "jsAdvanced/event-loop",
       ]
     },
     "AJax-note",
