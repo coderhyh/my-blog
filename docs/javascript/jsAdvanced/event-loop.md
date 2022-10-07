@@ -9,8 +9,6 @@ categories:
  - javascript
 ---
 
-
-
 ## 进程和线程
 
 - 线程和进程是操作系统中的两个概念：

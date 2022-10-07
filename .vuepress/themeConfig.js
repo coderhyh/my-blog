@@ -34,6 +34,9 @@ module.exports = {
       }, {
         "text": "React",
         "link": "/docs/react/react-note"
+      }, {
+        "text": "Electron",
+        "link": "/docs/electron/electron-index"
       }]
     },
     {

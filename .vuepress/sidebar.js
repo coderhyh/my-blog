@@ -37,7 +37,8 @@ module.exports = {
   ],
   "/docs/nodejs/": [
     "/",
-    "nodejs-note"
+    "nodejs-note",
+    "node-skill"
   ],
   "/docs/vue/": [
     "/",
@@ -82,6 +83,10 @@ module.exports = {
     "package-config",
     "mac-install",
   ],
+  "/docs/electron/": [
+    "/",
+    "electron-index",
+  ]
 
 
 }
