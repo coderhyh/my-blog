@@ -160,6 +160,149 @@ function getCookie(key) {
 }
 ```
 
+## storage工具类封装
+
+``` js
+class HYHCache {
+  constructor(isLocal = true) {
+    this.storage = isLocal ? localStorage: sessionStorage
+  }
+
+  setItem(key, value) {
+    if (value) {
+      this.storage.setItem(key, JSON.stringify(value))
+    }
+  }
+
+  getItem(key) {
+    let value = this.storage.getItem(key)
+    if (value) {
+      value = JSON.parse(value)
+      return value
+    } 
+  }
+
+  removeItem(key) {
+    this.storage.removeItem(key)
+  }
+
+  clear() {
+    this.storage.clear()
+  }
+
+  key(index) {
+    return this.storage.key(index)
+  }
+
+  length() {
+    return this.storage.length
+  }
+}
+
+const localCache = new HYHCache()
+const sessionCache = new HYHCache(false)
+
+export {
+  localCache,
+  sessionCache
+}
+```
+## 深拷贝
+```js
+function isObject(value) {
+  const valueType = typeof value
+  return (value !== null) && (valueType === "object" || valueType === "function")
+}
+
+function deepClone(originValue, map = new WeakMap()) {
+  // 判断是否是一个Set类型
+  if (originValue instanceof Set) {
+    return new Set([...originValue])
+  }
+
+  // 判断是否是一个Map类型
+  if (originValue instanceof Map) {
+    return new Map([...originValue])
+  }
+
+  // 判断如果是Symbol的value, 那么创建一个新的Symbol
+  if (typeof originValue === "symbol") {
+    return Symbol(originValue.description)
+  }
+
+  // 判断如果是函数类型, 那么直接使用同一个函数
+  if (typeof originValue === "function") {
+    return originValue
+  }
+
+  // 判断传入的originValue是否是一个对象类型
+  if (!isObject(originValue)) {
+    return originValue
+  }
+  if (map.has(originValue)) {
+    return map.get(originValue)
+  }
+
+  // 判断传入的对象是数组, 还是对象
+  const newObject = Array.isArray(originValue) ? []: {}
+  map.set(originValue, newObject)
+  for (const key in originValue) {
+    newObject[key] = deepClone(originValue[key], map)
+  }
+
+  // 对Symbol的key进行特殊的处理
+  const symbolKeys = Object.getOwnPropertySymbols(originValue)
+  for (const sKey of symbolKeys) {
+    // const newSKey = Symbol(sKey.description)
+    newObject[sKey] = deepClone(originValue[sKey], map)
+  }
+  
+  return newObject
+}
+```
+
+## 简易版事件总线
+```js
+class HYHEventBus {
+  constructor() {
+    this.eventBus = {}
+  }
+
+  on(eventName, eventCallback, thisArg) {
+    let handlers = this.eventBus[eventName]
+    if (!handlers) {
+      handlers = []
+      this.eventBus[eventName] = handlers
+    }
+    handlers.push({
+      eventCallback,
+      thisArg
+    })
+  }
+
+  off(eventName, eventCallback) {
+    const handlers = this.eventBus[eventName]
+    if (!handlers) return
+    const newHandlers = [...handlers]
+    for (let i = 0; i < newHandlers.length; i++) {
+      const handler = newHandlers[i]
+      if (handler.eventCallback === eventCallback) {
+        const index = handlers.indexOf(handler)
+        handlers.splice(index, 1)
+      }
+    }
+  }
+
+  emit(eventName, ...payload) {
+    const handlers = this.eventBus[eventName]
+    if (!handlers) return
+    handlers.forEach(handler => {
+      handler.eventCallback.apply(handler.thisArg, payload)
+    })
+  }
+}
+```
+
 ## base64转文件
 
 ```js

@@ -37,6 +37,9 @@ module.exports = {
       }, {
         "text": "Electron",
         "link": "/docs/electron/electron-index"
+      }, {
+        "text": "Linux",
+        "link": "/docs/linux/learn-linux.md"
       }]
     },
     {
@@ -75,6 +78,7 @@ module.exports = {
   "lastUpdated": "Last Updated",
   "author": "coderhyh",
   "authorAvatar": "/avatar.png",
-  "record": "x",
+  "record": "豫ICP备2022006039号-1",
+  "recordLink": 'https://beian.miit.gov.cn/#/Integrated/recordQuery',
   "startYear": "2022"
 }

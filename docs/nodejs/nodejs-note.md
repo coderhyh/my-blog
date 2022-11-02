@@ -278,6 +278,17 @@ let server = http.createServer(function (req, res) {
 }).listen(8080, '192.168.218.80')
 ```
 
+## os 模块
+
+```js
+var os=require("os");
+console.log(os.arch());//x64
+console.log(os.platform());//win
+console.log(os.cpus());
+```
+
+
+
 ## npm常用命令
 
 ```js
@@ -295,6 +306,12 @@ let server = http.createServer(function (req, res) {
 
 3.删除模块
 	npm uninstall 模块名
+  
+  强制重新build
+  npm rebuild
+  
+  清除缓存
+  npm cache clean
 
 4.项目转移时   不需要拷贝node_modules模板  npm i  (下载package.json中所记录的模块)
 
@@ -309,16 +326,15 @@ let server = http.createServer(function (req, res) {
   常用的别名:  start 启动    test 测试   dev 开发环境  build 打包项目
 ```
 
-## os 模块
+更多命令查看 [nodejs](https://docs.npmjs.com/cli-documentation/cli)
 
-```js
-var os=require("os");
-console.log(os.arch());//x64
-console.log(os.platform());//win
-console.log(os.cpus());
-```
+## npm install 原理
 
+![image-20221011232920912](/nodejs/image-20221011232920912.png)
 
+## package-lock.json
+
+![image-20221011232920912](/nodejs/image-20221011232920913.png)
 
 ## 模块小集合
 
@@ -821,6 +837,109 @@ pm2 delete all
 pm2 list
 ```
 
+more
+
+```
+# 启动进程/应用
+pm2 start bin/www
+
+# 重命名进程/应用
+pm2 start app.js --name wb123、
+
+# 添加进程/应用
+pm2 start bin/www
+
+# 结束进程/应用
+pm2 stop www
+
+# 结束所有进程/应用
+pm2 stop all
+
+# 删除进程/应用 pm2
+pm2 delete www
+
+# 删除所有进程/应用
+pm2 delete all
+
+# 列出所有进程/应用
+pm2 list
+
+# 查看某个进程/应用具体情况
+pm2 describe www
+
+# 查看进程/应用的资源消耗情况
+pm2 monit
+
+# 查看pm2的日志
+pm2 logs 序号/名称
+
+# 若要查看某个进程/应用的日志,使用
+pm2 logs www
+
+	如果想查询指定日志，用 tail 命令即可。
+	tail -f /root/.pm2/logs/main-out.log
+	
+	日志其他操作
+		# 显示流中的所有进程日志
+    pm2 logs --raw
+    # 清空所有日志文件
+    pm2 flush
+    # 重新加载所有日志
+    pm2 reloadLogs
+
+# 重新启动进程/应用
+pm2 restart www
+
+# 重新启动所有进程/应用
+pm2 restart all
+```
+
+start 参数
+
+```
+--watch：监听应用目录源码的变化，一旦发生变化，自动重启。如果要精确监听、不见听的目录，最好通过配置文件
+
+-i --instances：启用多少个实例，可用于负载均衡。如果-i 0或者-i max，则根据当前机器核数确定实例数目，可以弥补node.js缺陷
+
+--ignore-watch：排除监听的目录/文件，可以是特定的文件名，也可以是正则。比如--ignore-watch="test node_modules "some scripts"
+
+-n --name：应用的名称。查看应用信息的时候可以用到
+
+-o --output <path>：标准输出日志文件的路径，有默认路径
+
+-e --error <path>：错误输出日志文件的路径，有默认路径
+
+--interpreter <interpreter>：the interpreter pm2 should use for executing app (bash, python...)。比如你用的coffee script来编写应用
+```
+
+### pm2-logrotate插件
+
+```
+安装
+pm2 install pm2-logrotate
+
+通过 pm2 conf pm2-logratate 可以查看详细的配置
+```
+
+pm2-logrotate 具体配置说明：
+![image-20221011232920912](/nodejs/27d17c5db98c898989cbcccf3e7c0edd.webp)
+
+比如可以设置日志文件大小为1KB
+
+```
+pm2 set pm2-logratate:max_size 1K
+```
+
+### pm2启动ts
+
+pm2 安装`typescript`和`ts-node`
+
+```
+pm2 install ts-node@latest
+pm2 install typescript
+```
+
+
 ### 配置文件
 
 如果我们使用命令行参数定义一些选项，那么每次启动进程时，都需要敲上一大堆的命令，非常繁琐；
@@ -830,6 +949,12 @@ pm2 list
 如下所示  pm2 的配置文件 pm2.json ，然后在 package.json 文件中配置启动命令 "pm2": "pm2 start pm2.json" ，
 
 这样我们只需要运行 npm run pm2 就可以使用 pm2 启动我们的 express 项目，并且相关运行参数直接在 pm2.json 中配置好了。
+
+创建配置文件`ecosystem.config.js`
+
+```
+pm2 init simple
+```
 
 相关配置项表示的意义在下面文件中都已经注释说明
 

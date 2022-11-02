@@ -82,11 +82,14 @@ module.exports = {
     "tracker",
     "package-config",
     "mac-install",
+    "project-setup",
   ],
   "/docs/electron/": [
     "/",
     "electron-index",
+  ],
+  "/docs/linux/": [
+    "/",
+    "learn-linux",
   ]
-
-
 }

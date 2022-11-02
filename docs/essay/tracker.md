@@ -290,9 +290,16 @@ export default class Tracker {
 :::
 
 ```ini
+添加用户
 npm adduser
+登陆
 npm login
+发布包
 npm publish
+删除包
+npm unpublish
+使包过期
+npm deprecate
 ```
 
 
