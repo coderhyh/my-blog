@@ -91,5 +91,9 @@ module.exports = {
   "/docs/linux/": [
     "/",
     "learn-linux",
+  ],
+  "/docs/sql/": [
+    "/",
+    "learn-mysql",
   ]
 }

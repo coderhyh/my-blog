@@ -40,6 +40,9 @@ module.exports = {
       }, {
         "text": "Linux",
         "link": "/docs/linux/learn-linux.md"
+      }, {
+        "text": "Sql",
+        "link": "/docs/sql/learn-mysql.md"
       }]
     },
     {
