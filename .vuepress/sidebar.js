@@ -67,8 +67,13 @@ module.exports = {
   "/docs/react/": [
     "/",
     "react-note",
-    "useLess",
-    "react-router"
+    "learn-redux",
+    "learn-react-router",
+    "learn-react-css",
+    "react-transition",
+    "react-use-less",
+    "react-note(deprecated)",
+    "react-router(deprecated)"
   ],
   "/docs/essay/": [
     "/",

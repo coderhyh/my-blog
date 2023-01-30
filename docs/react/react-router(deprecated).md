@@ -1,5 +1,5 @@
 ---
-title: react路由
+title: react路由(deprecated)
 date: 2022-02-22
 sidebar: 'auto'
 tags:

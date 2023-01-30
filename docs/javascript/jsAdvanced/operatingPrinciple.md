@@ -49,6 +49,16 @@ categories:
 
 ## 浏览器渲染过程
 
+1. HTML被HTML解析器解析成DOM 树
+2. css则被css解析器解析成CSSOM 树
+3. 结合DOM树和CSSOM树，生成一棵渲染树(Render Tree)
+4. 生成布局（flow），即将所有渲染树的所有节点进行平面合成
+5. 将布局绘制（paint）在屏幕上
+
+第四步和第五步是最耗时的部分，这两步合起来，就是我们通常所说的**渲染**
+
+
+
 但是在这个执行过程中，HTML解析的时候遇到了JavaScript标签，应该怎么办呢？
 
 - 会停止解析HTML，而去加载和执行JavaScript代码；

@@ -102,6 +102,6 @@ const lessModuleRegex = /\.module\.(less)$/;
 
 ::: warning
 
-这种方式必须使用私有化的less才可以！！！[传送门！](/docs/react/react-note.html#%E7%A7%81%E6%9C%89%E5%8C%96css)
+这种方式必须使用私有化的less才可以！！！[传送门！](/docs/react/react-note(deprecated).html#%E7%A7%81%E6%9C%89%E5%8C%96css)
 
 :::

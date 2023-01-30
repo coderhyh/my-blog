@@ -326,8 +326,7 @@ SELECT brand, AVG(price), COUNT(*), AVG(score) FROM `products` GROUP BY brand;
 
 # 3.HAVING的使用
 -- 查找平均价格大于2000的 （这里不能使用WHERE，所以要使用HAVING）
-SELECT brand, AVG(price) as avgPrice, COUNT(*), AVG(score) FROM `products` GROUP BY brand 
-																												HAVING avgPrice > 2000;
+SELECT brand, AVG(price) as avgPrice, COUNT(*), AVG(score) FROM `products` GROUP BY brand HAVING avgPrice > 2000;
 
 # 4.需求：求评分score > 7.5的手机的，平均价格是多少？
 SELECT AVG(price) FROM `products` WHERE score > 7.5

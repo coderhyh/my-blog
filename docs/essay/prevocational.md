@@ -68,7 +68,7 @@ categories:
 
 安装完毕可以 `node -v` 查看版本
 
-详细可以看我的 [nodejs文档](/docs/nodejs/nodejs-note.html) 
+详细可以看 [nodejs文档](/docs/nodejs/nodejs-note.html) 
 
 :::
 
@@ -99,7 +99,7 @@ npm info express
 
 ::: tip
 
-如果想要下载 `sass` 想要更改镜像 可以查看我的 [sass安装](/docs/essay/preprocessor.html#sass)
+如果想要下载 `sass` 想要更改镜像 可以查看 [sass安装](/docs/essay/preprocessor.html#sass)
 
 :::
 
@@ -111,7 +111,7 @@ npm info express
 
 `npm install webpack -g` 全局安装
 
-详细可以看我的 [webpack文档](/docs/webpack/webpack-note.html#%E5%90%AF%E5%8A%A8%E5%AE%89%E8%A3%85webpack) 
+详细可以看 [webpack文档](/docs/webpack/webpack-note.html#%E5%90%AF%E5%8A%A8%E5%AE%89%E8%A3%85webpack) 
 
 :::
 
