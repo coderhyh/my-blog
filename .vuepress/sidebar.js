@@ -68,6 +68,7 @@ module.exports = {
     "/",
     "react-note",
     "learn-redux",
+    "learn-react-hook",
     "learn-react-router",
     "learn-react-css",
     "react-transition",
