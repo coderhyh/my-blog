@@ -115,3 +115,51 @@ presets:[presetIcons(),presetAttributify(),presetUno()]
 默认的 @unocss/preset-uno 预设（实验阶段）是一系列流行的原子化框架的 通用超集，包括了 Tailwind CSS，Windi CSS，Bootstrap，Tachyons 等。
 
 例如，ml-3（Tailwind），ms-2（Bootstrap），ma4（Tachyons），mt-10px（Windi CSS）均会生效。
+
+## unocss.config
+
+```ts
+import { defineConfig, presetAttributify, presetIcons, presetUno, Rule } from 'unocss'
+// https://github.com/unocss/unocss
+
+const sizeMapping: Record<string, string> = {
+  h: 'height',
+  w: 'width',
+  m: 'margin',
+  p: 'padding',
+  mt: 'margin-top',
+  mr: 'margin-right',
+  mb: 'margin-bottom',
+  ml: 'margin-left',
+  pt: 'padding-top',
+  pr: 'padding-right',
+  pb: 'padding-bottom',
+  pl: 'padding-left',
+  fs: 'font-size',
+  br: 'border-radius'
+}
+
+function getSizeRules(Mapping: Record<string, string>): Rule<{}>[] {
+  return Object.keys(Mapping).map((key) => {
+    const value = Mapping[key]
+    return [new RegExp(`^${key}(\\d+)$`), ([, d]) => ({ [value]: `${d}px` })]
+  })
+}
+
+export const createConfig = () => {
+  return defineConfig({
+    presets: [
+      presetUno(),
+      presetAttributify(),
+      presetIcons({
+        prefix: '',
+        autoInstall: true
+      })
+    ],
+    include: [/\.vue$/, /pages.json?$/],
+    rules: getSizeRules(sizeMapping)
+  })
+}
+
+export default createConfig()
+```
