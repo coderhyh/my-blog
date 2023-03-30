@@ -50,7 +50,7 @@ module.exports = {
       "icon": "reco-message",
       "items": [{
         "text": "GitHub",
-        "link": "https://github.com/LoveCodingHyh",
+        "link": "https://github.com/coderhyh",
         "icon": "reco-github"
       }]
     }
