@@ -1,9 +1,9 @@
 ---
 home: true
-heroText: 随遇而安
-tagline: A personalized personal blog.
+heroText: すずめの戸締まり
+# tagline: A personalized personal blog.
 
-bgImage: bgImg.jpg
+bgImage: bgImg1.jpg
 bgImageStyle: {
   height: '95vh'
 }
@@ -120,18 +120,20 @@ export default {
     color: #fff
   }
   .hero h1 {
+    text-shadow: 0 0 10px #848484;
     animation: title 2s steps(8) forwards, blink 1s infinite normal;
   }
   .hero p {
+    text-shadow: 0 0 8px #848484;
     animation: subtitle 2.5s steps(20) forwards, blink 1s infinite normal;
   }
   @keyframes title{
     0%{width: 0;}
-    100%{width: 170px;}
+    100%{width: 330px;}
   }
   @keyframes subtitle{
     0%{width: 0;}
-    100%{width: 370px;}
+    100%{width: 270px;}
   }
   @keyframes blink{
     50%{border-color: transparent;}
