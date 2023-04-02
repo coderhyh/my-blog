@@ -1,5 +1,5 @@
 ---
-title: 代码优化
+title: 性能优化
 date: 2022-04-18
 sidebar: 'auto'
 tags:
@@ -13,11 +13,11 @@ categories:
 :::
 <!-- more -->
 
-## 代码优化之图片优化
+## 图片压缩
 
 一般本地图片太大，访问时就会造成请求速度变慢；所以就可以使用插件来压缩图片
 
-## 安装
+### 安装
 
 `npm i image-webpack-loader -D`
 
@@ -33,7 +33,7 @@ categories:
 
 :::
 
-## 使用
+### 使用
 
 在 `vue.config.js` 配置好即可奔放了~
 

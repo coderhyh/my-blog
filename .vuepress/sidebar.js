@@ -84,6 +84,8 @@ module.exports = {
     "font-compress",
     "utility-plugin",
     "json-formatting",
+    "code-optimization",
+    "excel-import-export",
     "unocss",
     "tracker",
     "package-config",
