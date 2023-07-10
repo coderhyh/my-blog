@@ -46,6 +46,15 @@ git init 初始化git仓库    让git管理此文件夹
 
 // 当前分支A改过代码了。然后想改到B分支去 这时候分支A没有保存。切换不了 可以使用stash解决
 git stash
+
+// 用于选择并应用单个提交到当前分支
+// 它的作用是将指定的提交（或多个提交）从一个分支复制到另一个分支
+// 类似于手动合并的效果，但只复制选择的提交，而不是整个分支的历史记录。
+git cherry-pick <commit-hash>
+通过范围选择：可以使用 git cherry-pick <start-commit>..<end-commit>
+
+git cherry-pick -e <commit-hash> 选项可以启用交互式模式，允许你在应用提交之前编辑提交的内容。
+这样可以选择性地修改提交的文件、提交信息等内容
   
   
 //连接远程库
