@@ -100,7 +100,7 @@ module.exports = {
   lastUpdated: "Last Updated",
   author: "coderhyh",
   authorAvatar: "/avatar.png",
-  record: "豫ICP备2022006039号-1",
+  record: "豫ICP备2023018088号-1",
   recordLink: "https://beian.miit.gov.cn/#/Integrated/recordQuery",
   startYear: "2022",
 };
