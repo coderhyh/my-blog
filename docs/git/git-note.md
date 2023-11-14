@@ -82,9 +82,10 @@ git cherry-pick -e <commit-hash> 选项可以启用交互式模式，允许你�
 		ssh -T git@e.coding.net
 
 打标签
-	git tag -a v2 -m "项目2.0版本"
-	删除标签 git tag -d v2
-	切换版本 git checkout v2
+	git tag -a <tag-name> -m "项目2.0版本"
+	删除标签 git tag -d <tag-name>
+	切换版本 git checkout <tag-name>
+  删除仓库标签 git push origin --delete <tag-name>
 
 
 查看分支：git branch

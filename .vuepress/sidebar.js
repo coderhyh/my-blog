@@ -103,5 +103,11 @@ module.exports = {
   "/docs/sql/": [
     "/",
     "learn-mysql",
+  ],
+  "/docs/nestjs/": [
+    "/",
+    "learn-nestjs",
+    "nest-cli-config",
+    "session-captcha"
   ]
 }

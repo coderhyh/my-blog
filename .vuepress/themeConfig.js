@@ -55,6 +55,10 @@ module.exports = {
           text: "Sql",
           link: "/docs/sql/learn-mysql.md",
         },
+        {
+          text: "Nestjs",
+          link: "/docs/nestjs/learn-nestjs.md",
+        },
       ],
     },
     {
